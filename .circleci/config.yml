@@ -11,3 +11,35 @@ jobs:
       - run:
           name: Print the Current Time
           command: date
+  printParameters:
+    docker:
+      - image: debian:stretch
+    steps:
+      - checkout
+      - run:
+          name: var1
+          command: "echo ${param1}"
+      - run:
+          name: var2
+          command: echo $param1
+      - run:
+          name: var3
+          command: echo "${param1}"
+      - run:
+          name: set var by bad way
+          command: export param1="testvar"
+      - run:
+          name: var1
+          command: "echo ${param1}"
+      - run:
+          name: var2
+          command: echo $param1
+      - run:
+          name: var3
+          command: echo "${param1}"
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - printParameters
