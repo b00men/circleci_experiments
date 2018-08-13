@@ -17,6 +17,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: param2
+          command: echo $param2
+      - run:
           name: var1
           command: "echo ${param1}"
       - run:
